@@ -16,7 +16,7 @@ allprojects {
 
     repositories {
         flatDir {
-            dirs 'lib'
+            dirs '../../lib'
         }
         mavenCentral()
         mavenLocal()
