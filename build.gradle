@@ -15,6 +15,9 @@ allprojects {
     apply plugin: 'com.github.johnrengelman.shadow'
 
     repositories {
+        flatDir {
+            dirs 'libs'
+        }
         mavenCentral()
         mavenLocal()
         maven { url 'https://jitpack.io' }
