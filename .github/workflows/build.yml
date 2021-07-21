@@ -40,6 +40,9 @@ jobs:
       - name: Run build
         run: ./gradlew jar
       
+      - name: Check files
+        run: tree
+      
       - name: Upload build artifacts
         uses: actions/upload-artifact@master
         with:
