@@ -16,6 +16,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Check Java version
+        run: java -version
 
       - name: Config
         run: chmod +x ./gradlew
