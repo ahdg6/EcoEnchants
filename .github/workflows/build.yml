@@ -38,4 +38,10 @@ jobs:
         run: ./gradlew
 
       - name: Run build
-        run: ./gradlew jar
+        run: ./gradlew build
+      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@master
+        with:
+          name: build-result
+          path: build
