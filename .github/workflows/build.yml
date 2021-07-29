@@ -1,50 +1,32 @@
-# This is a basic workflow to help you get started with Actions
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: CI
+name: Java CI with Gradle
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, actions ]
   pull_request:
-    branches: [ master ]
-
-  workflow_dispatch:
+    branches: [ master, actions ]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Remove Java JDK 11
-        run: sudo apt-get remove --auto-remove openjdk*
-
-      - name: Setup Java JDK 16
-        uses: actions/setup-java@v2.1.0
-        with:
-          java-version: '16'
-          distribution: 'adopt'
-          java-package: 'jdk'
-          architecture: 'x64'
-
-      - name: Check Java version
-        run: java -version
-
-      - name: Config
-        run: chmod +x ./gradlew
-
-      - name: Run gradlew
-        run: ./gradlew
-
-      - name: Run build
-        run: ./gradlew jar
-      
-      - name: Check files
-        run: tree
-      
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@master
-        with:
-          name: build-result
-          path: .
+    - uses: actions/checkout@v2
+    - name: Set up JDK 16
+      uses: actions/setup-java@v2
+      with:
+        java-version: '16'
+        distribution: 'adopt-openj9'
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    - name: Clean Build
+      run: ./gradlew clean build
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: EcoEnchants Artifacts
+        path: ./bin/*.jar
